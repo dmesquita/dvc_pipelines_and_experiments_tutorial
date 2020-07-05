@@ -2,7 +2,7 @@ prepare:
   cmd: python3 src/prepare.py data/prepared
   deps:
   - path: src/prepare.py
-    md5: 24a1be1137689894f2add214117df867
+    md5: d7bbe25ea6140ebac71dbcd3627f87f4
   params:
     params.yaml:
       prepare.categories:
@@ -17,20 +17,34 @@ featurize:
   - path: data/prepared
     md5: 77cdc4b415254bc15c5d109816504915.dir
   - path: src/featurize.py
-    md5: e466eddc0b289185cef46b2c018508ac
+    md5: 7a0903b9ed6520f5b3b7edb4c2073158
   outs:
   - path: data/features
-    md5: 795aaaf5443ba8d60ad681ebd58e0458.dir
+    md5: ee0395550c20dac035a0945a344aae23.dir
 train:
   cmd: python3 src/train.py data/features model.pkl
   deps:
   - path: data/features
-    md5: 795aaaf5443ba8d60ad681ebd58e0458.dir
+    md5: ee0395550c20dac035a0945a344aae23.dir
   - path: src/train.py
-    md5: 368b97ff0c3c7c1234ce2fc7abf8129c
+    md5: 2221d18315cfb0ff074739e78a57d4cc
   params:
     params.yaml:
-      train.alpha: 0.1
+      train.alpha: 0.4
   outs:
   - path: model.pkl
-    md5: 41ff9ea5bdc283ba84e6a868dddcb514
+    md5: 1f9869d63ef38a2d39cfc0d125ec01de
+evaluate:
+  cmd: python3 src/evaluate.py model.pkl data/features scores.json plots.json
+  deps:
+  - path: data/features
+    md5: ee0395550c20dac035a0945a344aae23.dir
+  - path: model.pkl
+    md5: 1f9869d63ef38a2d39cfc0d125ec01de
+  - path: src/evaluate.py
+    md5: 11d9dabde94952ff57dd205ba12b440c
+  outs:
+  - path: plots.json
+    md5: 0bd78cacfeda546598555f6e4fe94c7d
+  - path: scores.json
+    md5: 5bb139d2d50063c0f733d2511a18e2bd

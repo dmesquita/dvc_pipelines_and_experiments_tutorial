@@ -9,7 +9,7 @@ import pickle
 if len(sys.argv) != 3:
     sys.stderr.write('Arguments error. Usage:\n')
     sys.stderr.write(
-        '\tpython featurization.py data-dir-path features-dir-path\n'
+        '\tpython3 featurization.py data-dir-path features-dir-path\n'
     )
     sys.exit(1)
 
@@ -38,7 +38,7 @@ def get_train_and_test_corpus(df_1, df_2):
     return corpus_train.append(corpus_test) 
 
 def append_labels_and_save_pkl(df, tfidf_matrix, filename):
-    output_file = os.path.join(features_path, 'train.pkl')
+    output_file = os.path.join(features_path, filename)
     target = df[["target"]]
     output = pd.concat([pd.DataFrame(tfidf_matrix.toarray()), target], axis=1)
 

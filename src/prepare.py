@@ -8,7 +8,7 @@ import pandas as pd
 if len(sys.argv) != 2:
     sys.stderr.write('Arguments error. Usage:\n')
     sys.stderr.write(
-        '\tpython prepare.py data-dir-path\n'
+        '\tpython3 prepare.py data-dir-path\n'
     )
     sys.exit(1)
 

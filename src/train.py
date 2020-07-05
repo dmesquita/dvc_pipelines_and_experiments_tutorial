@@ -8,7 +8,7 @@ import pickle
 if len(sys.argv) != 3:
     sys.stderr.write('Arguments error. Usage:\n')
     sys.stderr.write(
-        '\tpython train.py features-dir-path model-filename\n'
+        '\tpython3 train.py features-dir-path model-filename\n'
     )
     sys.exit(1)
 

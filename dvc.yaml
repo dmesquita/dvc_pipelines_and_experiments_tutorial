@@ -23,3 +23,15 @@ stages:
     - train.alpha
     outs:
     - model.pkl
+  evaluate:
+    cmd: python3 src/evaluate.py model.pkl data/features scores.json plots.json
+    deps:
+    - data/features
+    - model.pkl
+    - src/evaluate.py
+    metrics:
+    - scores.json:
+        cache: false
+    plots:
+    - plots.json:
+        cache: false
