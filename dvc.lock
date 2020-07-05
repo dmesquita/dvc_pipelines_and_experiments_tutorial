@@ -1,0 +1,36 @@
+prepare:
+  cmd: python3 src/prepare.py data/prepared
+  deps:
+  - path: src/prepare.py
+    md5: 24a1be1137689894f2add214117df867
+  params:
+    params.yaml:
+      prepare.categories:
+      - comp.graphics
+      - rec.sport.baseball
+  outs:
+  - path: data/prepared
+    md5: 77cdc4b415254bc15c5d109816504915.dir
+featurize:
+  cmd: python3 src/featurize.py data/prepared data/features
+  deps:
+  - path: data/prepared
+    md5: 77cdc4b415254bc15c5d109816504915.dir
+  - path: src/featurize.py
+    md5: e466eddc0b289185cef46b2c018508ac
+  outs:
+  - path: data/features
+    md5: 795aaaf5443ba8d60ad681ebd58e0458.dir
+train:
+  cmd: python3 src/train.py data/features model.pkl
+  deps:
+  - path: data/features
+    md5: 795aaaf5443ba8d60ad681ebd58e0458.dir
+  - path: src/train.py
+    md5: 368b97ff0c3c7c1234ce2fc7abf8129c
+  params:
+    params.yaml:
+      train.alpha: 0.1
+  outs:
+  - path: model.pkl
+    md5: 41ff9ea5bdc283ba84e6a868dddcb514

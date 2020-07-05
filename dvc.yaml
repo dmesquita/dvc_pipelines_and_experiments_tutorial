@@ -1,0 +1,25 @@
+stages:
+  prepare:
+    cmd: python3 src/prepare.py data/prepared
+    deps:
+    - src/prepare.py
+    params:
+    - prepare.categories
+    outs:
+    - data/prepared
+  featurize:
+    cmd: python3 src/featurize.py data/prepared data/features
+    deps:
+    - data/prepared
+    - src/featurize.py
+    outs:
+    - data/features
+  train:
+    cmd: python3 src/train.py data/features model.pkl
+    deps:
+    - data/features
+    - src/train.py
+    params:
+    - train.alpha
+    outs:
+    - model.pkl
