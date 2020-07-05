@@ -1,6 +1,6 @@
 prepare:
     categories:
         - comp.graphics
-        - rec.sport.baseball # it was 'sci.space' 
+        - sci.space # it was 'sci.space' 
 train:
     alpha: 0.1
