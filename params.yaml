@@ -1,0 +1,6 @@
+prepare:
+    categories:
+        - comp.graphics
+        - rec.sport.baseball
+train:
+    alpha: 0.9

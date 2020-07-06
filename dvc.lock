@@ -1,0 +1,50 @@
+prepare:
+  cmd: python3 src/prepare.py
+  deps:
+  - path: src/prepare.py
+    md5: 01a15f7704471bbae1b0b4d3fbfd655d
+  params:
+    params.yaml:
+      prepare.categories:
+      - comp.graphics
+      - rec.sport.baseball
+  outs:
+  - path: data/prepared
+    md5: 77cdc4b415254bc15c5d109816504915.dir
+featurize:
+  cmd: python3 src/featurize.py data/prepared data/features
+  deps:
+  - path: data/prepared
+    md5: 77cdc4b415254bc15c5d109816504915.dir
+  - path: src/featurize.py
+    md5: b3f3b6025acf784a51a7596f786e895e
+  outs:
+  - path: data/features
+    md5: ee0395550c20dac035a0945a344aae23.dir
+train:
+  cmd: python3 src/train.py data/features model.pkl
+  deps:
+  - path: data/features
+    md5: ee0395550c20dac035a0945a344aae23.dir
+  - path: src/train.py
+    md5: 2221d18315cfb0ff074739e78a57d4cc
+  params:
+    params.yaml:
+      train.alpha: 0.9
+  outs:
+  - path: model.pkl
+    md5: 4261e6cc93c850b6c6b97c2f3ae95050
+evaluate:
+  cmd: python3 src/evaluate.py model.pkl data/features scores.json plots.json
+  deps:
+  - path: data/features
+    md5: ee0395550c20dac035a0945a344aae23.dir
+  - path: model.pkl
+    md5: 4261e6cc93c850b6c6b97c2f3ae95050
+  - path: src/evaluate.py
+    md5: 11d9dabde94952ff57dd205ba12b440c
+  outs:
+  - path: plots.json
+    md5: 9e68566640606aff48965dcb592341d9
+  - path: scores.json
+    md5: f191dca3b0ab75f394f07ac8b31f3ccc
