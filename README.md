@@ -4,6 +4,8 @@ This guides uses the [DVC Get Started Guide](https://github.com/iterative/exampl
 as a starting point and takes you on **how
 to build maintainable Machine Learning pipelines using DVC**.
 
+If you have some time you can check the full article [here](https://towardsdatascience.com/the-ultimate-guide-to-building-maintainable-machiane-learning-pipelines-using-dvc-a976907b2a1b) (it has more in depth explanations than this readme :wink:)
+
 The principles are:
 - **Write a python script** for each pipeline step
 - **Save the parameters** each script uses in a `yaml` file
